@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闲置物品</title>
+    <link rel="stylesheet" href="css/search.css">
+</head>
+<body>
+
+<div class="from">
+    <form action="/upload" method="post" id="myForm" enctype="multipart/form-data"  onsubmit="return checkip()">
+        <div class="top">
+            <div class="top_top">
+                <div class="top_name">
+                    <div class="top_must">*</div>
+                    <div class="top_lei">商品名称</div>
+                </div>
+                <div class="top_text">
+                    <input type="text" id="goodsName" name="goodsName" class="top_input" placeholder="请输入商品名称">
+                </div>
+            </div>
+        </div>
+        
+        <div class="top">
+            <div class="top_top">
+                <div class="top_name">
+                    <div class="top_must">*</div>
+                    <div class="top_lei">商品描述</div>
+                </div>
+                <div class="top_text">
+                    <input type="text" id="detial" name="detial" class="top_input" placeholder="介绍一下要卖的宝贝吧~">
+                </div>
+            </div>
+        </div>
+        
+        <div class="top">
+            <div class="top_top">
+                <div class="top_name">
+                    <div class="top_must">*</div>
+                    <div class="top_lei">宝贝价格(只需要输入数字即可)</div>
+                </div>
+                <div class="top_text">
+                    <input type="text" oninput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" name="price" id="price" class="top_input" placeholder="请输入宝贝的价格">
+                </div>
+            </div>
+        </div>
+
+        <div class="top">
+            <div class="top_top">
+                <div class="top_name">
+                    <div class="top_must">*</div>
+                    <div class="top_lei">联系方式（建议输入qq）</div>
+                </div>
+                <div class="top_text">
+                    <input type="text" id="number" name="number" class="top_input" placeholder="怎么联系您呢？">
+                </div>
+            </div>
+        </div>
+        
+        <div class="top">
+            <div class="top_top">
+                <div class="top_name">
+                    <div class="top_must">*</div>
+                    <div class="top_lei">宝贝图片(添加图片，最多1张，图片大小不要超过5MB！)</div>
+                </div>
+                <div class="top_text">
+                    <img id="updateImg" class="updateimg" src="icon/上传图片.png" alt="">
+                </div>
+                <!-- 图片预览 -->
+                <div class="top_text_preview">
+                </div>
+            </div>
+        </div>
+
+        <!-- 按钮 -->
+        <div class="btn">
+            <div class="button" id="submitBtn">
+                <img src="icon/发布2.png" alt="">
+                <div class="text">发布</div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script src="http://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script>
+
+var formData = new FormData();
+$('#submitBtn').on('click', function(){
+    var number = $('#number').val();
+    var goodsName = $('#goodsName').val();
+    var detial = $('#detial').val();
+    var price = $('#price').val();
+    if (!formData.has('imgFile') && !formData.has('goodsName') && !formData.has('detial') && !formData.has('price') && !formData.has('number')) {
+        alert('请完善信息！');
+        return;
+    };
+    formData.append('goodsName', goodsName);
+    formData.append('detial', detial);
+    formData.append('price', price);
+    formData.append('number', number);
+
+    // 发送上传请求
+    $.ajax({
+        url:'/upload',
+        type: 'POST',
+        data: formData,
+        contentType:false,
+        processData:false,
+        success:function(data){
+            console.log('上传成功', data);
+            if (data.code == 0) {
+                alert('上传成功！');
+                window.location.href = 'http://www.myyaya.com.cn/allpublic';
+                return;
+            } else if (data.code == -1) {
+                alert('上传失败！');
+                return;
+            }
+        }
+    })
+});
+
+wx.config({
+    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    appId: '<%= appId %>', // 必填，公众号的唯一标识
+    timestamp: '<%= timestamp %>', // 必填，生成签名的时间戳
+    nonceStr: '<%= noncestr %>', // 必填，生成签名的随机串
+    signature: '<%= signature %>',// 必填，签名
+    jsApiList: [
+        'chooseImage',
+        'getLocalImgData',
+        'previewImage',
+    ] // 必填，需要使用的JS接口列表
+});
+
+
+wx.ready(function () {
+    var updateImg = document.getElementById('updateImg');
+    updateImg.onclick = function(){
+    // 选择图片并上传
+    wx.chooseImage({
+    count: 1,
+    success: function(res) {
+        let localIds = res.localIds;
+        console.log('图片数量', res);
+        //for (let i = 0; i < localIds.length; i++) {
+            const element = localIds[0];
+            wx.getLocalImgData({
+                localId: element,
+                success: function(res) {
+                var localData = res.localData;
+                const fileSize = Math.round(localData.length / 1024 / 1024 * 100) / 100;
+                console.log('文件大小', fileSize);
+                if (fileSize > 2) {
+                    alert('文件过大，无法上传！');
+                    return;
+                }
+                var base64Img = 'data:image/jpeg;base64,' + localData;
+                // 图片预览
+                var img = $('<img>').addClass('updateimg').attr('src', base64Img);
+                $('.top_text_preview').append(img)
+                // var formData = new FormData();
+                formData.append('imgFile', base64Img);
+
+
+                }
+
+            });
+        //}
+      }
+    });
+
+    }
+
+});
+
+wx.error(function (res) {
+    console.log(res, '失败');
+})
+</script>
+</body>
+</html>

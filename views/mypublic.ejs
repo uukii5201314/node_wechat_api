@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的资源</title>
+  <link rel="stylesheet" href="css/mypublic.css">
+</head>
+<body>
+<div class="search">
+  <div class="top">
+    <input id="search" class="input" type="text" placeholder="搜索">
+    <img src="icon/搜索 (1).png" alt="">
+  </div>
+</div>
+
+<% mypublic.forEach(item => { %>
+<div class="conitem">
+  <div class="item">
+    <div class="item_left">
+      <img src="<%= item.goodsImgUrl %>" alt="">
+    </div>
+    <div class="item_right">
+      <div class="item_right_left">
+        <div class="item_name"><%= item.goodsName %></div>
+        <div class="detial"><%= item.goodsDetial %></div>
+        <a id="deleteBtn" class="item_price" href="delete/<%= item.id %>">下架商品</a>
+        <div class="item_right_right"><%= item.time %></div>
+      </div>
+    </div>
+  </div>
+</div>
+<% }) %>
+
+<a href="/service">
+  <div class="back">
+    <img src="/icon/群蜂主页.png" alt="">
+  </div>
+</a>
+
+
+</body>
+<script>
+let deleteBtn = document.querySelectorAll('#deleteBtn');
+//绑定事件
+deleteBtn.forEach(item =>{
+    item.addEventListener('click', function(e){
+        if(confirm('您确定要下架该商品吗？')){
+            return true;
+        } else {
+            //阻止默认事件
+            e.preventDefault();
+        }
+    })
+})
+</script>
+</html>

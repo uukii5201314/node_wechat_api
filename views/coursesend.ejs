@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>课表推送</title>
+    <link rel="stylesheet" href="css/coursesend.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="title">
+        <h1>课表推送</h1>
+        <div class="text">点击开关推送课表</div>
+    </div>
+    <div class="arrow"></div>
+    <div class="push">
+      <div class="push_top">
+        <div class="push_left">每日课表推送</div>
+        <div class="btn">
+            <label class="switch">
+                <input type="checkbox" id="toggle-switch" onclick="updateStatus()">
+                <span class="slider"></span>
+            </label>
+        </div>
+      </div>
+    </div>
+    <div class="arrow"></div>
+    <a  href="https://mp.weixin.qq.com/s/xEJI9x95UHxEoAxdBu19GQ">
+        <div class="img">
+            <img src="icon/微信登录.png" alt="">
+            <div class="img_text">联系客服</div>
+        </div>
+    </a>
+</body>
+<script>
+    function updateStatus() {
+        $("#toggle-switch").prop("disabled", true); // 禁用按钮
+        const newStatus = $("#toggle-switch").prop("checked") ? 1 : 0;
+        $.post("/updateStatus", { status: newStatus }, function(data) {
+            // 更新状态成功后的回调函数
+            console.log(data);
+            $("#toggle-switch").prop("disabled", false); // 启用按钮
+        });
+    }
+
+    $(document).ready(function() {
+        // 检查数据库中的值并设置按钮状态
+        $.get("/getStatus", function(data) {
+            if (data.msg === 1) {
+                $("#toggle-switch").prop("checked", true);
+            }
+        });
+    });
+</script>
+</html>

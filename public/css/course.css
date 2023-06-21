@@ -1,0 +1,329 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+	font-family: Arial, sans-serif;
+	height: 100%;
+}
+
+html {
+	height: 100%;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+	overflow-x: auto;
+	height: 100%;
+	padding-bottom: 60px;
+}
+
+table {
+	box-sizing: border-box;
+	border-collapse: collapse;
+	table-layout: fixed;
+	width: 100%;
+	height: 100%;
+}
+
+th,
+td {
+	width: 13%;
+	height: 15%;
+	border: 1px solid #ddd;
+	text-align: center;
+	padding: 5px;
+	font-size: 60%;
+	/* overflow: hidden;
+	white-space: nowrap; */
+}
+
+thead th:first-child,
+tbody td:first-child {
+	text-align: left;
+	font-weight: bold;
+}
+
+
+.color-1 {
+	background-color: #95d2ef;
+	color: #fff;
+}
+
+.color-2 {
+	background-color: #f4aab7;
+	color: #fff;
+}
+
+.color-3 {
+	background-color: #ae88a1;
+	color: #fff;
+}
+
+.color-4 {
+	background-color: #5191bf;
+	color: #fff;
+}
+
+.color-5 {
+	background-color: #bbdde9;
+	color: #fff;
+}
+
+.color-6 {
+	background-color: #d55f6f;
+	color: #fff;
+}
+
+.color-7 {
+	background-color: #f0c986;
+	color: #fff;
+}
+
+.color-8 {
+	background-color: #6a855c;
+	color: #fff;
+}
+
+.color-9 {
+	background-color: #95d2ef;
+	color: #fff;
+}
+
+.color-10 {
+	background-color: #f4aab7;
+	color: #fff;
+}
+
+.color-11 {
+	background-color: #ae88a1;
+	color: #fff;
+}
+
+.color-12 {
+	background-color: #5191bf;
+	color: #fff;
+}
+
+.color-13 {
+	background-color: #bbdde9;
+	color: #fff;
+}
+
+.color-14 {
+	background-color: #d55f6f;
+	color: #fff;
+}
+
+.color-15 {
+	background-color: #f0c986;
+	color: #fff;
+}
+
+.color-16 {
+	background-color: #6a855c;
+	color: #fff;
+}
+
+.color-17 {
+	background-color: #95d2ef;
+	color: #fff;
+}
+
+.color-18 {
+	background-color: #f4aab7;
+	color: #fff;
+}
+
+.color-19 {
+	background-color: #ae88a1;
+	color: #fff;
+}
+
+.color-20 {
+	background-color: #5191bf;
+	color: #fff;
+}
+
+.color-21 {
+	background-color: #bbdde9;
+	color: #fff;
+}
+
+.color-22 {
+	background-color: #d55f6f;
+	color: #fff;
+}
+
+.color-23 {
+	background-color: #f0c986;
+	color: #fff;
+}
+
+.color-24 {
+	background-color: #6a855c;
+	color: #fff;
+}
+
+.color-25 {
+	background-color: #95d2ef;
+	color: #fff;
+}
+
+.color-26 {
+	background-color: #f4aab7;
+	color: #fff;
+}
+
+.color-27 {
+	background-color: #ae88a1;
+	color: #fff;
+}
+
+.color-28 {
+	background-color: #5191bf;
+	color: #fff;
+}
+
+.color-29 {
+	background-color: #bbdde9;
+	color: #fff;
+}
+
+.color-30 {
+	background-color: #d55f6f;
+	color: #fff;
+}
+
+.color-31 {
+	background-color: #f0c986;
+	color: #fff;
+}
+
+.color-32 {
+	background-color: #6a855c;
+	color: #fff;
+}
+
+.color-33 {
+	background-color: #95d2ef;
+	color: #fff;
+}
+
+.color-34 {
+	background-color: #f4aab7;
+	color: #fff;
+}
+
+.color-35 {
+	background-color: #ae88a1;
+	color: #fff;
+}
+/* 底部导航栏 */
+.middle_below{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	display: flex;
+	background-color: #fff;
+	justify-content: space-around;
+}
+.footLeft{
+	/* display: flex; */
+	text-align: center;
+	text-decoration: none;
+}
+.footLeft > img{
+	width: 40px;
+	height: 40px;
+}
+.index {
+	color: #939395;
+	font-size: 50%;
+}
+.index1{
+	font-size: 50%;
+	color: #04c09d;
+}
+.footRight {
+	text-align: center;
+	text-decoration: none;
+}
+.footRight > img{
+	width: 40px;
+	height: 40px;
+}
+.my{
+	font-size: 50%;
+	color: #939395;
+}
+
+
+.select2-container .select2-selection--single {
+	height: auto;
+	overflow-y: auto;
+}
+#modalContainer {
+	display: none;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	height: 60%;
+	width: 100%;
+	z-index: 9999;
+}
+
+#modalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+	z-index: 9998;
+}
+
+#modalContent {
+	position: relative;
+	height: 100%;
+	padding: 20px;
+	box-sizing: border-box;
+	overflow-y: auto;
+	background-color: white;
+	z-index: 9999;
+}
+
+#closeButton {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: 24px;
+	cursor: pointer;
+}
+
+#weekContainer {
+	text-align: center;
+	margin-bottom: 20px;
+}
+h3{
+	text-align: center;
+	color: #04c09d;
+}
+#weekSelect{
+	height: 30px;
+	padding: 0 30px;
+	border-radius: 15px;
+}
+#confirmButton {
+	display: block;
+	line-height: 40px;
+	padding: 0 40px;
+	border: none;
+	border-radius: 15px;
+	background-color: #04c09d;
+	color: #fff;
+	margin: 0 auto;
+}
+
+

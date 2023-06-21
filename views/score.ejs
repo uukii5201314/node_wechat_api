@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= result[0].name ? result[0].name : '' %>的成绩单</title>
+    <link rel="stylesheet" href="css/score.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+          <h1><%= result[0].name ? result[0].name : '' %>的成绩单</h1>
+        </div>
+        <div class="info">
+          <h2>基本信息</h2>
+          <div class="row">
+            <div class="label">姓名：</div>
+            <div class="value"><%= result[0].name ? result[0].name : '' %></div>
+          </div>
+          <div class="row">
+            <div class="label">学院：</div>
+            <div class="value"><%= result[0].institute ? result[0].institute : '' %></div>
+          </div>
+          <div class="row">
+            <div class="label">专业：</div>
+            <div class="value"><%= result[0].major ? result[0].major : '' %></div>
+          </div>
+        </div>
+        <div class="grade">
+          <h2>学习成绩</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>科目</th>
+                <th>学分</th>
+                <th>成绩</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <% let totalCredit = 0, totalScore = 0, count = 0 %>
+              <% results.forEach(item => {
+                  const credit = parseFloat(item.credit),
+                        score = parseFloat(item.score);
+                  if (!isNaN(credit) && !isNaN(score)) {
+                      // 只累加有效的学分和分数
+                      totalCredit += credit;
+                      totalScore += credit * score;
+                      count++;
+                  }
+              %>
+              <tr>
+                <td><%= item.name %></td>
+                <td><%= item.credit %></td>
+                <td class="score" data-score="<%= item.score %>"><%= item.score %></td>
+              </tr>
+              <% }) %>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="summary">
+          <p>总学分：<%= totalCredit.toFixed(1) %></p>
+          <p>平均分: <%= (totalScore / totalCredit).toFixed(2) %></p>
+          <p>排名：<%= `${count}/${results.length}` %></p>
+        </div>
+      </div>
+
+      <a href="service">
+        <div class="back">
+          <img src="icon/群蜂主页.png" alt="">
+        </div>
+      </a>
+      <script>
+        const scoreElements = document.querySelectorAll(".score");
+        scoreElements.forEach(element => {
+          const score = parseFloat(element.dataset.score);
+          if (score < 60) {
+            element.classList.add("red");
+          } else {
+            element.classList.remove("red");
+          }
+        });
+      </script>
+</body>
+</html>

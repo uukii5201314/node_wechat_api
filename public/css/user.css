@@ -1,0 +1,139 @@
+/* 整体页面 */
+body{
+    background-color: #e8e8e8;
+    width: 100%;
+}
+* {
+    padding: 0;
+    margin: 0;
+}
+a{
+    text-decoration: none;
+    color: #333;
+}
+.top{
+    position: relative;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-image: linear-gradient(#0ccaa8, #54d8c0, #9de5d9);
+}
+.top_left{
+    display: flex;
+    margin-left: 15px;
+    align-items: center;
+}
+.top_left_img img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.top_left_text{
+    margin-left: 10px;
+}
+.name{
+    margin-left: 5px;
+}
+.studentNum{
+    margin-top: 5px;
+    color: #ffcb34;
+    font-size: 80%;
+    padding: 0px 5px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-color: #ffe6a4;
+    border: #fff1be;
+}
+.top_right{
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    font-size: 80%;
+    color: #fff;
+    background-color: #04ad8e;
+}
+.middle{
+    background-color: #fff;
+    position: relative;
+    border-radius: 15px;
+    top: -50px;
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    z-index: 1;
+}
+.middle_item{
+    display: flex;
+    align-items: center;
+    padding: 7px 3px;
+    justify-content: space-between;
+}
+.itemicon img{
+    padding-top: 4px;
+    width: 30px;
+    height: 30px;
+}
+.itemtext{
+    margin-left: 5px;
+}
+.item_left{
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+}
+.item_right img{
+    padding-top: 4px;
+    width: 20px;
+    height: 20px;
+}
+.arrow{
+    /* border: 0.1px solid gray; */
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    border-bottom: 1px solid #cdcbcb;
+}
+/* 底部导航栏 */
+.middle_below{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    background-color: #fff;
+    justify-content: space-around;
+}
+.footLeft{
+    /* display: flex; */
+    text-align: center;
+    text-decoration: none;
+}
+.footLeft > img{
+    width: 40px;
+    height: 40px;
+}
+.index {
+    color: #939395;
+    font-size: 50%;
+}
+.index1{
+    font-size: 50%;
+    color: #939395;
+}
+.footRight {
+    text-align: center;
+    text-decoration: none;
+}
+.footRight > img{
+    width: 40px;
+    height: 40px;
+}
+.my{
+    font-size: 50%;
+    color: #04c09d;
+}

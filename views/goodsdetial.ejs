@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>蜘蛛市场</title>
+  <link rel="stylesheet" href="/css/goodsdetial.css">
+</head>
+<body>
+  <header>
+    <h1>现爱换旧</h1>
+  </header>
+  <main>
+    <img src="<%= goodsInfo.goodsImgUrl %>" alt="商品图片">
+    <h1><%= goodsInfo.goodsName %></h1>
+    <p><%= goodsInfo.goodsDetial %></p>
+    <p class="price">¥ 商品价格:<%= goodsInfo.goodsPrice %></p>
+    <p class="date">发布时间：<%= goodsInfo.time %></p>
+    <p class="contact">联系方式：<%= goodsInfo.number %></p>
+  </main>
+  <div class="title">TA的市场</div>
+  <div class="arrow"></div>
+
+<div class="all">
+  <% result.forEach(item => { %>
+<!-- <a href="goodsdetial/:<%= item.id %>"> -->
+  <div class="goods">
+    <a href="/goodsdetial/:<%= item.id %>">
+    <img class="goods-img" src="<%= item.goodsImgUrl %>" mode="aspectFill">
+    <div class="below">
+      <div class="goods-name"><%= item.goodsName %></div>
+      <div class="goods-price">
+        <div class="goodsPrice">$价格：</div>
+        <div class="goods-monkey"><%= item.goodsPrice %></div>
+      </div>
+    </div>
+  </a>
+  </div>
+<!-- </a> -->
+  <% }) %>
+
+  <!-- <div class="goods" bindtap="goodsDetails">
+    <img class="goods-img" src="https://www.helloimg.com/images/2023/03/30/o3Wrqz.jpg">
+    <div class="goods-name">特斯拉 Model Y</div>
+    <div class="goods-price">
+      <div class="goodsPrice">$价格：</div>
+      <div class="goods-monkey">19-23w</div>
+    </div>
+  </div> -->
+
+  <div class="goods" bindtap="goodsDetails" style="visibility: hidden; margin-bottom: 10px;">
+    <img class="goods-img" src="https://www.helloimg.com/images/2023/03/30/o3Wrqz.jpg">
+    <div class="goods-name">特斯拉 Model Y</div>
+    <div class="goods-price">
+      <div class="goodsPrice">$价格：</div>
+      <div class="goods-monkey">19-23w</div>
+    </div>
+  </div>
+
+  <a href="/service">
+  <div class="back">
+    <img src="/icon/群蜂主页.png" alt="">
+  </div>
+</a>
+</div>
+
+
+</body>
+</html>

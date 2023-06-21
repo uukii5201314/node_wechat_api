@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<style>
+    .container {
+        border-radius: 10px;
+        line-height: 80px;
+        margin: 0 auto;
+        width: 80%;
+        background-color: #e3edd5;
+    }
+    .text {
+        font-size: 300%;
+        margin-left: 20px;
+        padding-top: 80px;
+    }
+    .click {
+        margin-left: 20px;
+    }
+</style>
+<body>
+    <div class="container">
+        <!-- 顶部 -->
+        <div class="container-top">
+            <span class="text">:)<%= msg %></span>
+        </div>
+        <!-- 底部 -->
+        <div class="container-below">
+            <span id="navagit" class="click" onclick="location.href='<%= url %>'">点击跳转</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<form  action="/score" method="POST" class="container" onsubmit="return checkip()">
+    <div class="container">
+        <div class="login-wrapper">
+            <div class="header">登录成绩</div>
+            <div class="form-wrapper">
+                <input type="text" name="username" placeholder="请输入学号" class="input-item" id="username">
+                <input type="password" name="password" placeholder="请输入教务系统密码" class="input-item" id="password">
+                <div type="submit" value="登录" class="btn" id="sign">登录</div>
+            </div>
+             <div class="msg">
+                点击登录即代表你同意使用
+                <a href="https://mp.weixin.qq.com/s/6AP62hWvGrAg1_gNwh3bWA">蜘蛛网</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div id="loading">
+    <div class="lds-ripple"><div></div><div></div></div>
+    <div class="loading-text">正在登录中，请稍等...<span id="countdown">28</span></div>
+</div>
+
+<a href="/service">
+    <div class="back">
+      <img src="/icon/群蜂主页.png" alt="">
+    </div>
+</a>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script>
+
+// var formData = new FormData();
+$(function() {
+    // 获取登录按钮元素和账号密码输入框元素
+    var loginBtn = $('#sign');
+    var usernameInput = $('#username');
+    var passwordInput = $('#password');
+
+    // 点击登录按钮时触发
+    loginBtn.on('click', function() {
+        // 获取账号和密码输入框中的值
+        var usernameVal = usernameInput.val().trim();
+        var passwordVal = passwordInput.val().trim();
+
+        // 判断账号和密码是否为空，若为空则提示 error
+        if (!usernameVal) {
+            alert('请输入学号!');
+            return false;
+        }
+        if (!passwordVal) {
+            alert('请输入密码!');
+            return false;
+        }
+        // 显示加载动画
+        $('#loading').css('display', 'block')
+        // document.getElementById('loading').style.display = 'block';
+        // 使用 AJAX 发送登录请求
+        $.ajax({
+            url: '/score',
+            type: 'POST',
+            data: {
+                username: usernameVal,
+                password: passwordVal
+            },
+            dataType: 'json',
+            success: function(res) {
+                console.log(JSON.stringify(res));
+                // 处理登录结果
+                if (res.code === 0) {
+                    // 隐藏加载动画
+                    $('#loading').css('display', 'none')
+                    // document.getElementById('loading').style.display = 'none';
+                    // 登录成功后跳转到指定页面
+                    window.location.href = '/score';
+                } else if (res.code === -1) {
+                    alert('登录失败，请重试！', res.message);
+                } 
+            },
+            error: function(err) {
+                console.log(err);
+                alert('登录请求失败！,请稍后重试！' + err);
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    var savedUsername = localStorage.getItem("username");
+    var savedPassword = localStorage.getItem("password");
+
+    if (savedUsername && savedPassword) {
+      $("#username").val(savedUsername);
+      $("#password").val(savedPassword);
+    }
+  });
+
+  // 当用户点击登录按钮时，将用户名和密码保存到本地存储中
+  $("#sign").click(function() {
+    var username = $("#username").val();
+    var password = $("#password").val();
+    localStorage.setItem("username", username);
+    localStorage.setItem("password", password);
+  });
+// 倒计时秒数
+var countdownSeconds = 28;
+
+// 获取显示倒计时的元素
+var countdownElement = document.getElementById('countdown');
+
+// 定义倒计时函数
+function countdown() {
+    countdownElement.innerText = countdownSeconds;
+
+    if (countdownSeconds > 0) {
+        countdownSeconds--;
+        setTimeout(countdown, 1000); // 1秒钟后继续执行倒计时函数
+    } else {
+        // 倒计时结束后的操作
+        // 在这里可以添加其他代码，如跳转页面或执行其他逻辑
+    }
+}
+
+// 开始倒计时
+countdown();
+</script>
+</body>
+</html>

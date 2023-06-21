@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的</title>
+    <link rel="stylesheet" href="css/user.css">
+</head>
+<body>
+<div class="top">
+    <div class="top_left">
+        <div class="top_left_img">
+            <img src="<%= headimgurl %>" alt="">
+        </div>
+        <div class="top_left_text">
+            <div class="name"><%= name ? name : nickname %></div>
+            <div class="studentNum"><%= user.studentnum ? user.studentnum : '' %></div>
+        </div>
+    </div>
+    <div class="top_right"><%= user.institute ? user.institute : '' %></div>
+</div>
+
+<div class="middle">
+    <a class="middle_item" href="myInfo">
+        <div class="item_left">
+            <div class="itemicon">
+                <img src="icon/个人资料.jpg" alt="">
+            </div>
+            <div class="itemtext">个人资料</div>
+        </div>
+        <div class="item_right">
+            <img src="icon/右箭头 (3).png" alt="">
+        </div>
+    </a>
+    <div class="arrow"></div>
+    <a class="middle_item" href="myquestion">
+        <div class="item_left">
+            <div class="itemicon">
+                <img src="icon/我的活动.jpg" alt="">
+            </div>
+            <div class="itemtext">我的提问</div>
+        </div>
+        <div class="item_right">
+            <img src="icon/右箭头 (3).png" alt="">
+        </div>
+    </a>
+    <div class="arrow"></div>
+    <a class="middle_item" href="mypublic">
+        <div class="item_left">
+            <div class="itemicon">
+                <img src="icon/共享资源.jpg" alt="">
+            </div>
+            <div class="itemtext">共享资源</div>
+        </div>
+        <div class="item_right">
+            <img src="icon/右箭头 (3).png" alt="">
+        </div>
+    </a>
+    <div class="arrow"></div>
+    <div class="middle_item">
+        <div class="item_left">
+            <div class="itemicon">
+                <img src="icon/爱心服务.jpg" alt="">
+            </div>
+            <div class="itemtext">爱心服务</div>
+        </div>
+        <div class="item_right">
+            <img src="icon/右箭头 (3).png" alt="">
+        </div>
+    </div>
+    <div class="arrow"></div>
+    <div class="middle_item">
+        <div class="item_left">
+            <div class="itemicon">
+                <img src="icon/关于.jpg" alt="">
+            </div>
+            <div class="itemtext">关于</div>
+        </div>
+        <div class="item_right">
+            <img src="icon/右箭头 (3).png" alt="">
+        </div>
+    </div>
+</div>
+
+
+
+<div class="middle_below">
+    <a class="footLeft" href="getCode">
+        <img src="icon/un首页.png" alt="">
+        <div class="index">首页</div>
+    </a>
+    <a class="footLeft" href="service">
+        <img src="icon/unSelectIndex.png" alt="">
+        <div class="index1">服务</div>
+    </a>
+    <a class="footRight" href="user">
+        <img src="icon/selectMy.png" alt="">
+        <div class="my">我</div>
+    </a>
+</div>
+</body>
+</html>

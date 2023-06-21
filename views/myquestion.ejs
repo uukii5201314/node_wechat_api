@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的提问</title>
+    <link rel="stylesheet" href="css/myquestion.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+</head>
+<body>
+
+<% result.forEach(item => { %>
+    <div class="question">
+        <div class="question__header">
+            <div class="left">
+                <img src="<%= item.headimgUrl%>" alt="头像">
+                <div class="question__name">@<%= item.nickname %></div>
+            </div>
+            <button class="btn" data-question-id="<%= item.id %>">删除问题</button>
+        </div>
+        <div class="question__content">
+            <%= item.question %>
+        </div>
+    </div>
+<% }) %>
+
+
+
+
+
+
+
+
+<a href="/service">
+    <div class="back">
+        <img src="/icon/群蜂主页.png" alt="">
+    </div>
+</a>
+<script>
+    $(document).ready(function () {
+        $('.btn').click(function () {
+            var questionId = $(this).data('question-id'); // 获取按钮的自定义属性值
+            Swal.fire({
+                title: '温馨提示',
+                text: '确认删除吗？',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                confirmButtonText: '确认',
+                cancelButtonText: '取消',
+                customClass: {
+                    container: 'custom-swal2',
+                    content: 'custom-swal2'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // 执行删除逻辑
+                    sendDeleteRequest(questionId);
+                }
+            });
+        });
+
+        function sendDeleteRequest(questionId) {
+            // 在这里发送 AJAX 请求进行删除操作
+            // 可以根据实际情况修改 URL、数据等
+            $.ajax({
+                url: 'question/' + questionId,
+                type: 'POST',
+                data: {questionId: questionId}, // 使用传递的问题ID
+                success: function (response) {
+                    // 处理成功响应的逻辑
+                    console.log('问题删除成功！', response);
+                    if (response.code == 0){
+                        window.location.href = 'myquestion'
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // 处理请求错误的逻辑
+                    console.error(error);
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

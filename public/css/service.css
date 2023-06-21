@@ -1,0 +1,120 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: #e8e8e8;
+}
+a{
+    text-decoration: none;
+}
+/* 中间的功能 */
+.row{
+    padding-top: 3px;
+}
+.serveTitle{
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+.serve{
+    background-color: #fff;
+    width: 92%;
+    display: block;
+    margin: 10px auto;
+    border-radius: 10px;
+}
+.serve1{
+    background-color: #fff;
+    width: 92%;
+    display: block;
+    margin: 10px auto;
+    border-radius: 10px;
+    margin-bottom: 100px;
+}
+.row1, .row2{
+    display: flex;
+    margin-top: 5px;
+    padding: 0px 5px 0px 0px;
+    justify-content: space-evenly;
+}
+.serveitem{
+    align-items: center;
+    text-align: center;
+}
+.serveitem img{
+    width: 50px;
+    height: 50px;
+}
+.serveitem_text{
+    color: #313131;
+    font-size: 50%;
+}
+.row1{
+    padding-bottom: 15px;
+}
+.row2{
+    padding-bottom: 15px;
+}
+
+/* 底部导航栏 */
+.middle_below{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    background-color: #fff;
+    justify-content: space-around;
+}
+.footLeft{
+    /* display: flex; */
+    text-align: center;
+    text-decoration: none;
+}
+.footLeft > img{
+    width: 40px;
+    height: 40px;
+}
+.index {
+    color: #939395;
+    font-size: 50%;
+}
+.index1{
+    font-size: 50%;
+    color: #04c09d;
+}
+.footRight {
+    text-align: center;
+    text-decoration: none;
+}
+.footRight > img{
+    width: 40px;
+    height: 40px;
+}
+.my{
+    font-size: 50%;
+    color: #939395;
+}
+
+/* 动画 */
+.loading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* transform: translate(-50%, -50%); */
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 6px solid aqua;
+    border-color: aqua transparent;
+    animation: roate-loading 1.2s linear infinite;
+    border-radius: 50%;
+}
+@keyframes roate-loading {
+    from{
+        rotate: 0deg;
+    }
+    to{
+        rotate: 360deg;
+    }
+}

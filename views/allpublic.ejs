@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>发布资源</title>
+  <link rel="stylesheet" href="css/allpublic.css">
+</head>
+<body>
+<div class="search">
+  <div class="top">
+    <input id="search" class="input" type="text" placeholder="搜索">
+    <img src="icon/搜索 (1).png" alt="">
+  </div>
+</div>
+
+<% ldleitems.forEach(item => { %>
+<a href="goodsdetial/:<%= item.id %>">
+  <div class="conitem">
+    <div class="item">
+      <div class="item_left">
+        <img src="<%= item.goodsImgUrl %>" alt="">
+      </div>
+      <div class="item_right">
+        <div class="item_right_left">
+          <div class="item_name"><%= item.goodsName %></div>
+          <div class="detial"><%= item.goodsDetial %></div>
+          <div class="item_price"><%= item.goodsPrice %>元</div>
+          <div class="item_right_right"><%= item.time %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
+<% }) %>
+
+
+<a href="/service">
+  <div class="back">
+    <img src="/icon/群蜂主页.png" alt="">
+  </div>
+</a>
+
+<!-- 按钮 -->
+<a class="btn" href="search">
+  <div class="button">
+    <img src="icon/发布2.png" alt="">
+    <div class="text">我要发布</div>
+  </div>
+</a>
+</body>
+<script>
+</script>
+</html>

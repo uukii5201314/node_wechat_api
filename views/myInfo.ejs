@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= result[0].name ? result[0].name : '' %>的个人信息</title>
+    <link rel="stylesheet" href="css/myInfo.css">
+  </head>
+  <body>
+    <div id="wrapper">
+      <h1>个人信息</h1>
+      <ul>
+        <li>
+          <label>姓名:</label>
+          <span><%= result[0].name ? result[0].name : '' %></span>
+        </li>
+        <li>
+          <label>学号:</label>
+          <span><%= result[0].studentnum ? result[0].studentnum : '' %></span>
+        </li>
+        <li>
+          <label>学院:</label>
+          <span><%= result[0].institute ? result[0].institute : '' %></span>
+        </li>
+        <li>
+          <label>专业:</label>
+          <span><%= result[0].major ? result[0].major : '' %></span>
+        </li>
+        <li>
+          <label>班级:</label>
+          <span><%= result[0].class ? result[0].class : '' %></span>
+        </li>
+      </ul>
+      <!-- <button class="edit-button" type="button">编辑</button> -->
+    </div>   
+    
+    <a href="/service">
+      <div class="back">
+        <img src="/icon/群蜂主页.png" alt="">
+      </div>
+    </a>
+  </body>
+</html>

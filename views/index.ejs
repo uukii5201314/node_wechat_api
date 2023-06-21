@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+<div class="top-box">
+    <div class="top-box-inner">
+        <div class="weather">
+            <div class="weatherLeft">
+                <img src="weatherIcon/<%= icon %>.png" alt="">
+                <span class="weatherLeft_text"><%= temp %>°C <%= text %></span>
+            </div>
+            <div class="weatherLeft">
+                <img src="weatherIcon/3.1定位.png" alt="">
+                <span class="weatherLeft_text">潍坊学院</span>
+            </div>
+        </div>
+        <!-- 轮播 -->
+        <div class="swiper">
+            <img src="image/siwper1.jpg" alt="">
+        </div>
+    </div>
+</div>
+<!-- 中间的功能 -->
+<div class="serve">
+    <div class="servetop">
+        <div class="row1">
+            <a class="serveitem" href="https://www.wfu.edu.cn/_t1234/sjwy/list.psp">
+                <img src="icon/山.png">
+                <div class="serveitem_text">视觉潍院</div>
+            </a>
+            <a class="serveitem" href="course">
+                <img src="icon/课程管理.png">
+                <div class="serveitem_text">我的课表</div>
+            </a>
+            <a class="serveitem" href="https://news.wfu.edu.cn/">
+                <img src="icon/记事本.png">
+                <div class="serveitem_text">校内新闻</div>
+            </a>
+            <a class="serveitem" href="https://yz.chsi.com.cn/">
+                <img src="icon/博士.png">
+                <div class="serveitem_text">研招网</div>
+            </a>
+        </div>
+        <div class="row2">
+            <a class="serveitem" href="coursesend">
+                <img src="icon/课表推送.png">
+                <div class="serveitem_text">课表推送</div>
+            </a>
+            <a class="serveitem" href="allquestion">
+                <img src="icon/常见问题.png">
+                <div class="serveitem_text">一键提问</div>
+            </a>
+            <a class="serveitem" href="service">
+                <img src="icon/更多.jpg">
+                <div class="serveitem_text">更多应用</div>
+            </a>
+            <div class="serveitem" style="visibility: hidden;">
+                <img src="icon/风景.png">
+                <div class="serveitem_text">校园风貌</div>
+            </div>
+        </div>
+        <a class="row3" href="https://news.wfu.edu.cn/">
+            <img src="icon/attion.jpg">
+        </a>
+    </div>
+</div>
+
+<!-- 闲置好货和你问我答 -->
+<div class="com_top">
+    <div class="comtuiny">
+        <a class="com_left" href="allpublic">
+            <img src="icon/zicon1.jpg" alt="">
+        </a>
+        <a class="com_left" href="allquestion">
+            <img src="icon/zicon2.jpg" alt="">
+        </a>
+    </div>
+</div>
+
+<!-- 快报 -->
+<div class="k_top">
+    <div class="kbao">
+        <div class="k_left">
+            <img src="icon/kuaibao2.jpg" alt="">
+            <div class="k_text">校园动态：</div>
+        </div>
+        <div class="k_right">更多</div>
+    </div>
+</div>
+<!-- 为你推荐 -->
+<div class="share">
+    <div class="s_top">
+        <div class="share_t">
+            <img src="icon/fire.png" alt="">
+            <div class="share_text">为你推荐</div>
+        </div>
+        <div class="unknow">敬请期待！！！</div>
+    </div>
+</div>
+
+<!-- 底部导航栏 -->
+<div class="middle_below">
+    <a class="footLeft" href="getCode">
+        <img src="icon/首页 (1).png" alt="">
+        <div class="index">首页</div>
+    </a>
+    <a class="footLeft" href="service">
+        <img src="icon/unSelectIndex.png" alt="">
+        <div class="index1">服务</div>
+    </a>
+    <a class="footRight" href="user">
+        <img src="icon/unSelectMy.png" alt="">
+        <div class="my">我</div>
+    </a>
+</div>
+
+<!-- 动画 -->
+<div class="loading"></div>
+</body>
+<script>
+    //获取动画
+    let loading = document.querySelector('.loading');
+    window.onload = function(){
+        loading.style.display = "none";
+    }
+</script>
+</html>
