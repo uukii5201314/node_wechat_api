@@ -19,9 +19,10 @@ async function swiper(account, password, openid){
         await page.type('#userAccount', account);  //输入账号
         await page.type('#userPassword', password);//输入密码
         await page.click('.btn');//点击登录
-        await page.waitForNavigation({
-            waitUntil: 'load'
-        });//等待页面加载出来，等同于window.onload
+        // await page.waitForNavigation({
+        //     waitUntil: 'load'
+        // });//等待页面加载出来，等同于window.onload
+        await new Promise(resolve => setTimeout(resolve, 1500));
         await page.waitForSelector('.Nsb_pw > #dataList > tbody > tr:nth-child(2) > td > a');
         await page.click('.Nsb_pw > #dataList > tbody > tr:nth-child(2) > td > a');
         // 获取iframe元素标签
