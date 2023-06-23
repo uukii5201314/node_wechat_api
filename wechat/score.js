@@ -1,10 +1,9 @@
 const puppeteer = require('puppeteer');
-const dbScore = require('../utils/dbScore');
-const db = require('../db/index')
+
 // const account = '21161140140';
 // const password = 'Xhy18790141291';
 // const openid = '125'
-async function score(account, password, openid){
+async function score(account, password){
     let browser;
     try{
         browser = await puppeteer.launch({
@@ -20,10 +19,10 @@ async function score(account, password, openid){
         await page.type('#userAccount', account);  //输入账号
         await page.type('#userPassword', password);//输入密码
         await page.click('.btn');//点击登录
-        await page.waitForNavigation({
-            waitUntil: 'load'
-        });//等待页面加载出来，等同于window.onload
-        // await new Promise(resolve => setTimeout(resolve, 500));
+        // await page.waitForNavigation({
+        //     waitUntil: 'load'
+        // });//等待页面加载出来，等同于window.onload
+        await new Promise(resolve => setTimeout(resolve, 1500));
         await page.waitForSelector('.Nsb_pw > #dataList > tbody > tr:nth-child(2) > td > a');
         await page.click('.Nsb_pw > #dataList > tbody > tr:nth-child(2) > td > a');
         // 获取iframe元素标签
@@ -31,6 +30,7 @@ async function score(account, password, openid){
         await page.waitForSelector('iframe');
         const iframeElement = await page.$('iframe');
         const frame = await iframeElement.contentFrame();
+        await new Promise(resolve => setTimeout(resolve, 1500));
         await frame.click('body > div > div.middlewaprightpart.r > div.middlewaprightup > div.usuafunmenu > div > div > div:nth-child(2)');
         // //设置等待时长为3秒，等待页面加载出来
         // await new Promise(resolve => setTimeout(resolve, 500));
@@ -53,43 +53,25 @@ async function score(account, password, openid){
         const frame2 = await iframeElement2.contentFrame();
         const score = await frame2.$$eval('#dataList > tbody > tr', n => n
             .map(a => a.innerText));
-        console.log(score);
+        //console.log(score);
     
     // 获取表头索引
         const [idx, semesterIdx, , , nameIdx, , , creditIdx, , , scoreIdx] = score[0].split('\t');
     
     // 提取课程名称、开课学期、学分、成绩
-        const result = score.slice(1).map((row) => {
+        const result = [];
+        score.slice(1).map((row) => {
             const [, semester, , name, , score, , credit] = row.split('\t');
-            return {
+            result.push({
                 semester,
                 name,
                 credit,
                 score,
-            };
+            });
         });
-    
-        console.log(result);
-            //  const openid = '111';
-             const strpd = 'select * from class_schedule where openid = ?'
-             db.query(strpd, [openid], (err, results) =>{
-                 if (results.length > 0){
-                     const str = `delete from class_schedule where openid = ?`;
-                     const values = [openid];
-                     db.query(str, values, (error, results) => {
-                         if (error) {
-                             return error
-                         } else {
-                             console.log('查询课表数据，已成功删除');
-                             dbScore(openid, result);
-                         }
-                     })
-                 } else {
-                     dbScore(openid, result);
-                 }
-             })
-            //  await page.screenshot({path: '小熊的课表.png'});//截个图
-             await browser.close();//关掉浏览器
+
+        await browser.close();//关掉浏览器
+        return result;
     } catch (error) {
         console.error(error);
         if (browser) {
