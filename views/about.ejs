@@ -38,6 +38,15 @@
             display: block;
             border-radius: 10px;
         }
+        .back img{
+            width: 50px;
+            height: 50px;
+            position: fixed;
+            top: 50%;
+            transform: translateY(200px);
+            right: 30px;
+            z-index: 9999; /* 可选，设置层级高度，确保元素位于其他元素之上 */
+        }
     </style>
 </head>
 <body>
@@ -53,5 +62,11 @@
     <p>如果同学们在使用接口的时候，或者在部署项目的时候，遇到问题欢迎前来与我们交流</p>
 
 </div>
+
+<a href="/service">
+    <div class="back">
+        <img src="/icon/群蜂主页.png" alt="">
+    </div>
+</a>
 </body>
 </html>
