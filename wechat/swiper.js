@@ -69,7 +69,7 @@ async function swiper(account, password, openid){
 
 
 
-
+        await frame.waitForSelector('div.grid:nth-child(1)');
         //模拟点击获取全部课程表
         await frame.click('div.grid:nth-child(1)')
         //等待页面加载，默认时间为三秒
