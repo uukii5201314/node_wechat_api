@@ -3,7 +3,7 @@ module.exports = {
     "button":[
         {
             "type":"view",
-            "name":"功能大厅",
+            "name":"首页",
             "url":"http://www.myyaya.com.cn/getCode"
         },
         {

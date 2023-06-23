@@ -29,16 +29,17 @@ module.exports = message => {
         options.mediaId = message.MediaId;
         console.log(message.Recognition)
     } else if (message.MsgType === 'event'){
+        if (message.Event === 'subscribe'){
+            content = '欢迎你的关注'
+        } else {
+            console.log('无情取关')
+        }
+    } else if (message.MsgType === 'click'){
         if (message.Event === 'SCORE_QUERY'){
             content = '你的成绩为0'
         }
         if (message.Event === 'COURSE_SCHEDULE'){
             content = '你今天没有课'
-        }
-        if (message.Event === 'subscribe'){
-            content = '欢迎你的关注'
-        } else {
-            console.log('无情取关')
         }
     }
 

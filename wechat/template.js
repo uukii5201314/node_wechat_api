@@ -25,6 +25,8 @@ module.exports = options => {
                         </item>`
             })
         resMessage += `</Articles>`
+    } else if (options.msgType == 'click'){
+        resMessage += `<Content><![CDATA[${options.content}]]></Content>`;
     }
     resMessage += '</xml>';
     //最终回复给用户的xml数据
