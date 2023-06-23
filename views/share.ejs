@@ -12,7 +12,7 @@
 <div class="endpoint">
     <h2 class="endpoint-title">获取成绩</h2>
     <p class="endpoint-description">通过POST请求获取成绩的API。</p>
-    <pre><code>POST http://8.130.109.112/score?username=USERNAME&amp;password=PASSWORD</code></pre>
+    <pre style="background-color: #f5f5f5; padding: 10px; overflow: auto; height: 20px;"><code>POST http://8.130.109.112/score?username=USERNAME&amp;password=PASSWORD</code></pre>
 
     <div class="response">
         <h3 class="response-title">响应</h3>
@@ -53,6 +53,13 @@
                 <br>
                 ]
             </p>
+            <div class="core">
+                <h2 class="endpoint-title">字段说明</h2>
+                <p>semester ----- 学期</p>
+                <p>name ----- 课程名称</p>
+                <p>credit ----- 学分</p>
+                <p>score ----- 成绩/分数</p>
+            </div>
         </div>
     </div>
 </div>
@@ -60,7 +67,7 @@
 <div class="endpoint">
     <h2 class="endpoint-title">获取课表</h2>
     <p class="endpoint-description">通过POST请求获取课表的API。</p>
-    <pre><code>POST http://8.130.109.112/course?username=USERNAME&amp;password=PASSWORD</code></pre>
+    <pre style="background-color: #f5f5f5; padding: 10px; overflow: auto; height: 20px;"><code>POST http://8.130.109.112/course?username=USERNAME&amp;password=PASSWORD</code></pre>
 
     <div class="response">
         <h3 class="response-title">响应</h3>
@@ -77,15 +84,15 @@
                 <br>
                 &nbsp;&nbsp;[
                 <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;"熊海印",
+                &nbsp;&nbsp;&nbsp;&nbsp;"姓名（如：张三）",
                 <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;"21161140140",
+                &nbsp;&nbsp;&nbsp;&nbsp;"学号（如：21xxxxx）",
                 <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;"体育学院",
+                &nbsp;&nbsp;&nbsp;&nbsp;"学院（如：体育学院）",
                 <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;"体育教育",
+                &nbsp;&nbsp;&nbsp;&nbsp;"专业（如：体育教育）",
                 <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;"体育本21(6)"
+                &nbsp;&nbsp;&nbsp;&nbsp;"班级（如：体育本21(x)）"
                 <br>
                 &nbsp;&nbsp;],
                 <br>
@@ -93,11 +100,11 @@
                 <br>
                 &nbsp;&nbsp;&nbsp;&nbsp;"周一",
                 <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;"健康教育学",
+                &nbsp;&nbsp;&nbsp;&nbsp;"课程名称（如：计算机科学）",
                 <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;"陆贝",
+                &nbsp;&nbsp;&nbsp;&nbsp;"授课教师（如：李四）",
                 <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;"1-10,12-13(周)[01-02节]"
+                &nbsp;&nbsp;&nbsp;&nbsp;"节次（1-10,12-13(周)[01-02节]）"
                 <br>
                 &nbsp;&nbsp;]
                 <br>
@@ -107,11 +114,17 @@
     </div>
 </div>
 
-<h2 class="endpoint-title">开源地址</h2>
-<p class="endpoint-description">gitee</p>
-<pre><code>https://gitee.com/under-my-umbrella/node_wechat_api.git</code></pre>
+<div>
+    <h2 class="endpoint-title">开源地址</h2>
+    <p class="endpoint-description">gitee</p>
+    <pre style="background-color: #f5f5f5; padding: 10px; overflow: auto; height: 20px;"><code>https://gitee.com/under-my-umbrella/node_wechat_api.git</code></pre>
+</div>
 
-
+<a href="/service">
+    <div class="back">
+        <img src="/icon/群蜂主页.png" alt="">
+    </div>
+</a>
 <script>
     // 在这里可以添加一些Javascript的互动逻辑
 </script>
