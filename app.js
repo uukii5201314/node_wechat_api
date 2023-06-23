@@ -132,7 +132,7 @@ app.get('/allpublic', (req, res) =>{
         if(err) return console.log(err.message);
         //console.log(result..reverse());
         res.render('allpublic', {ldleitems: result})
-        })
+    })
 })
 
 //网页授权
@@ -240,19 +240,23 @@ app.post('/upload', upload.single('imgFile'), (req, res) => {   // upload.array(
 
 //获取自己的资源信息
 app.get('/mypublic', (req, res) => {
-    //得到用户的openid
-    //读取用户信息
-    const userKey = req.cookies.userKey;
-    console.log('得到的数据用户', userKey);
-    const openid = userKey.openid;
-    //在数据库中获取所有的聊天记录，定义sql语句
-    const strAll = 'SELECT * FROM ldleitems WHERE openid = ? ORDER BY time DESC';
-    const values = [openid];
-    db.query(strAll, values, function(error, results) {
-        if (error) throw error;
-        //console.log(results);
-        res.render('mypublic', {mypublic:results})
-    });
+    try {
+        //得到用户的openid
+        //读取用户信息
+        const userKey = req.cookies.userKey;
+        console.log('得到的数据用户', userKey);
+        const openid = userKey.openid;
+        //在数据库中获取所有的聊天记录，定义sql语句
+        const strAll = 'SELECT * FROM ldleitems WHERE openid = ? ORDER BY time DESC';
+        const values = [openid];
+        db.query(strAll, values, function(error, results) {
+            if (error) throw error;
+            //console.log(results);
+            res.render('mypublic', {mypublic:results})
+        });
+    } catch (e) {
+        throw e;
+    }
 })
 
 //下架商品信息
@@ -307,6 +311,7 @@ app.get("/getStatus", (req, res) => {
 });
 //课程表
 app.get('/course', (req, res) =>{
+    try {
     //读取用户信息
     const userKey = req.cookies.userKey;
     console.log('得到的数据用户', userKey);
@@ -406,9 +411,13 @@ app.get('/course', (req, res) =>{
         });
         res.render('course', { currentWeek, week11,  week12, week13, week14, week15, week21, week22, week23, week24, week25, week31, week32, week33, week34, week35, week41, week42, week43, week44, week45, week51, week52, week53, week54, week55, week61, week62, week63, week64, week65, week71, week72, week73, week74, week75})
     });
+    } catch (e) {
+        throw e;
+    }
 })
 //选择周次
 app.get('/course/:id', (req, res) =>{
+    try {
     //读取用户信息
     const userKey = req.cookies.userKey;
     console.log('得到的数据用户', userKey);
@@ -506,6 +515,9 @@ app.get('/course/:id', (req, res) =>{
         });
         res.render('courseweek', { id, week11,  week12, week13, week14, week15, week21, week22, week23, week24, week25, week31, week32, week33, week34, week35, week41, week42, week43, week44, week45, week51, week52, week53, week54, week55, week61, week62, week63, week64, week65, week71, week72, week73, week74, week75})
     });
+    } catch (e) {
+            throw e;
+    }
 })
 //商品详情页面
 app.get('/goodsdetial/:id', (req, res) =>{
@@ -568,15 +580,19 @@ app.get('/found', checkLogin, (req, res) =>{
 
 //个人信息
 app.get('/myInfo', (req, res) => {
+    try {
     //读取用户信息
-    const userKey = req.cookies.userKey;
-    console.log('得到的数据用户', userKey);
-    const openid = userKey.openid;
-    const str = 'select * from student where openid =?';
-    db.query(str, [openid], (err, result) => {
-        //console.log('参选的数据', result);
-        res.render('myInfo', { result });
-    })
+        const userKey = req.cookies.userKey;
+        console.log('得到的数据用户', userKey);
+        const openid = userKey.openid;
+        const str = 'select * from student where openid =?';
+        db.query(str, [openid], (err, result) => {
+            //console.log('参选的数据', result);
+            res.render('myInfo', { result });
+        })
+    } catch (e) {
+        throw e;
+    }
 })
 
 //爬取课表
@@ -634,53 +650,65 @@ app.get('/loginscore', (req, res) =>{
 
 //问题社区
 app.get('/allquestion', (req, res) => {
-    //读取用户信息
-    const userKey = req.cookies.userKey;
-    let nickname = userKey.nickname;
-    const str = 'select * from question ORDER BY time DESC';
-    db.query(str, (err, result) => {
-        console.log('参选的数据', result);
-        res.render('allquestion', { result, nickname });
-    })
+    try {
+        //读取用户信息
+        const userKey = req.cookies.userKey;
+        let nickname = userKey.nickname;
+        const str = 'select * from question ORDER BY time DESC';
+        db.query(str, (err, result) => {
+            console.log('参选的数据', result);
+            res.render('allquestion', { result, nickname });
+        });
+    } catch (e) {
+        throw e;
+    }
 })
 //接受问题
 app.post('/allquestion', (req, res) => {
-    //读取用户信息
-    const userKey = req.cookies.userKey;
-    let openid = userKey.openid;
-    let nickname = userKey.nickname;
-    let headimgurl = userKey.headimgurl;
-    let id = shortid.generate();
-    let question = req.body.question;
-    let time = moment().format('YYYY-MM-DD HH:mm:ss');
-    //定义一个sql语句
-    const str = 'insert into question (id, openid, nickname, headimgUrl, question, time) values(?, ?, ?, ?, ?, ?)'
-    //执行sql语句
-    db.query(str, [id, openid, nickname, headimgurl, question, time], (err, result) => {
-        if(err) return console.log(err.message);
-        if(result.affectedRows === 1){
-            console.log('插入成功');
-            //成功提醒
-            res.render('success', {title: '发布成功', msg: '发布成功！', url: 'allquestion'})
-        }
-    })
+    try {
+        //读取用户信息
+        const userKey = req.cookies.userKey;
+        let openid = userKey.openid;
+        let nickname = userKey.nickname;
+        let headimgurl = userKey.headimgurl;
+        let id = shortid.generate();
+        let question = req.body.question;
+        let time = moment().format('YYYY-MM-DD HH:mm:ss');
+        //定义一个sql语句
+        const str = 'insert into question (id, openid, nickname, headimgUrl, question, time) values(?, ?, ?, ?, ?, ?)'
+        //执行sql语句
+        db.query(str, [id, openid, nickname, headimgurl, question, time], (err, result) => {
+            if(err) return console.log(err.message);
+            if(result.affectedRows === 1){
+                console.log('插入成功');
+                //成功提醒
+                res.render('success', {title: '发布成功', msg: '发布成功！', url: 'allquestion'})
+            }
+        });
+    } catch (e) {
+        throw e;
+    }
 
 })
 //获取个人信息
 app.get('/myquestion', (req, res) => {
-    //读取用户信息
-    const userKey = req.cookies.userKey;
-    console.log('得到的数据用户', userKey);
-    const openid = userKey.openid;
-    const str = 'select * from question where openid =? ORDER BY time DESC';
-    db.query(str, [openid], (err, result) => {
-        //console.log('参选的数据', result);
-        if (result.length > 0) {
-            res.render('myquestion', { result })
-        } else {
-            res.render('success', {title: '未查询到数据', msg: '来发布问题吧！', url: 'allquestion'})
-        }
-    })
+    try {
+        //读取用户信息
+        const userKey = req.cookies.userKey;
+        console.log('得到的数据用户', userKey);
+        const openid = userKey.openid;
+        const str = 'select * from question where openid =? ORDER BY time DESC';
+        db.query(str, [openid], (err, result) => {
+            //console.log('参选的数据', result);
+            if (result.length > 0) {
+                res.render('myquestion', { result })
+            } else {
+                res.render('success', {title: '未查询到数据', msg: '来发布问题吧！', url: 'allquestion'})
+            }
+        });
+    } catch (e) {
+        throw e;
+    }
 })
 //删除接口
 app.post('/question/:id', (req, res) => {
