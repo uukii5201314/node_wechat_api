@@ -725,6 +725,10 @@ app.post('/question/:id', (req, res) => {
         }
     })
 })
+//接口
+app.get('/share', (req, res) => {
+    res.render('share')
+})
 
 //接受处理所有的消息
 app.use(auth());
