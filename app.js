@@ -310,7 +310,7 @@ app.get("/getStatus", (req, res) => {
     })
 });
 //课程表
-app.get('/course', (req, res) =>{
+app.get('/course', checkLogin, (req, res) =>{
     try {
     //读取用户信息
     const userKey = req.cookies.userKey;
@@ -416,7 +416,7 @@ app.get('/course', (req, res) =>{
     }
 })
 //选择周次
-app.get('/course/:id', (req, res) =>{
+app.get('/course/:id', checkLogin, (req, res) =>{
     try {
     //读取用户信息
     const userKey = req.cookies.userKey;
