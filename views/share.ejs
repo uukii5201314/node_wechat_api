@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>接口API文档</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/share.css">
+</head>
+<body>
+<h1>接口API文档</h1>
+
+<div class="endpoint">
+    <h2 class="endpoint-title">获取成绩</h2>
+    <p class="endpoint-description">通过POST请求获取成绩的API。</p>
+    <pre><code>POST /score?username=USERNAME&amp;password=PASSWORD</code></pre>
+
+    <div class="response">
+        <h3 class="response-title">响应</h3>
+        <div class="response-example">
+            <p class="field">
+                <span class="field-name">code:</span> 0
+            </p>
+            <p class="field">
+                <span class="field-name">message:</span> 登录成功！
+            </p>
+            <p class="field">
+                <span class="field-name">score:</span>
+                [
+                <br>
+                &nbsp;&nbsp;{
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="field-name">semester:</span> "2021-2022-1",
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="field-name">name:</span> "大学IT",
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="field-name">credit:</span> "1.5",
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="field-name">score:</span> "77"
+                <br>
+                &nbsp;&nbsp;},
+                <br>
+                &nbsp;&nbsp;{
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="field-name">semester:</span> "2021-2022-1",
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="field-name">name:</span> "大学英语（一）",
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="field-name">credit:</span> "4",
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="field-name">score:</span> "73"
+                <br>
+                &nbsp;&nbsp;}
+                <br>
+                ]
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint">
+    <h2 class="endpoint-title">获取课表</h2>
+    <p class="endpoint-description">通过POST请求获取课表的API。</p>
+    <pre><code>POST /course?username=USERNAME&amp;password=PASSWORD</code></pre>
+
+    <div class="response">
+        <h3 class="response-title">响应</h3>
+        <div class="response-example">
+            <p class="field">
+                <span class="field-name">code:</span> 0
+            </p>
+            <p class="field">
+                <span class="field-name">message:</span> 登录成功！
+            </p>
+            <p class="field">
+                <span class="field-name">allcourse:</span>
+                [
+                <br>
+                &nbsp;&nbsp;[
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"熊海印",
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"21161140140",
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"体育学院",
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"体育教育",
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"体育本21(6)"
+                <br>
+                &nbsp;&nbsp;],
+                <br>
+                &nbsp;&nbsp;[
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"周一",
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"健康教育学",
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"陆贝",
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"1-10,12-13(周)[01-02节]"
+                <br>
+                &nbsp;&nbsp;]
+                <br>
+                ]
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 在这里可以添加一些Javascript的互动逻辑
+</script>
+</body>
+</html>
