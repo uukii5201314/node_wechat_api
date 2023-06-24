@@ -33,27 +33,30 @@ module.exports = () => {
                 //说明消息不是来自微信服务器
                 res.end('error');
             }
-
+            try {
             //接受请求体中的数据
-            const xmlData = await getUserDataAsync(req);
-             //console.log(xmlData)
-            //将xml数据解析为js数据
-            const jsData = await parseXMLAsync(xmlData);
-             // console.log(jsData)
-            //数据格式化
-            const message = formatMessage(jsData);
+                const xmlData = await getUserDataAsync(req);
+                 //console.log(xmlData)
+                //将xml数据解析为js数据
+                const jsData = await parseXMLAsync(xmlData);
+                 // console.log(jsData)
+                //数据格式化
+                const message = formatMessage(jsData);
 
-            const options = reply(message)
+                const options = reply(message)
 
-            //最终回复的消息
-            const resMessage = template(options);
+                //最终回复的消息
+                const resMessage = template(options);
 
 
-            console.log(resMessage)
-            //返回响应给微信服务器
-           return  res.type('application/xml').send(resMessage)
-            // //会发送三次请求
-            // res.end('');
+                console.log(resMessage)
+                //返回响应给微信服务器
+               return  res.type('application/xml').send(resMessage)
+                // //会发送三次请求
+                // res.end('');
+            } catch (e) {
+                throw e;
+            }
 
         } else {
             res.end('error')
