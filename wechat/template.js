@@ -39,6 +39,7 @@ module.exports = options => {
     let xml = builder.create('xml');
 
     xml.ele('ToUserName').cdata(options.toUserName);
+    console.log('ToUserName:', options.toUserName); // 添加此行进行日志输出
     xml.ele('FromUserName').cdata(options.fromUserName);
     xml.ele('CreateTime', options.createTime);
     xml.ele('MsgType').cdata(options.msgType);

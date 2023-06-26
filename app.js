@@ -99,8 +99,9 @@ app.get('/search', async (req, res) => {
 app.get('/user', (req, res) =>{
     try {
     //读取用户信息
-    const userKey = req.cookies.userKey;
-    console.log('得到的数据用户', userKey);
+    // const userKey = req.cookies.userKey;
+    // console.log('得到的数据用户', userKey);
+        const userKey = req.session.infoUser;
         //定义sql语句
         const regStr = 'select name, institute, studentnum from student where openid=?'
         //执行sql语句
@@ -179,7 +180,8 @@ app.get('/index', async (req, res) => {
         nickname: userInfo.data.nickname,
         headimgurl: userInfo.data.headimgurl
     };
-    res.cookie('userKey', infoUser,{maxAge:900000,httpOnly:true});
+    // res.cookie('userKey', infoUser,{maxAge:900000,httpOnly:true});
+    req.session.infoUser = infoUser;
     res.render('index', {temp, icon, text})
 });
 
@@ -192,13 +194,13 @@ app.get('/upload/:filename', function(req, res) {
 
 // 处理上传接口
 app.post('/upload', upload.single('imgFile'), (req, res) => {   // upload.array('imgFile', 10),
-    //生成一个id
     let id = shortid.generate();
     const goodsName = req.body.goodsName;
     const detial = req.body.detial;
     const price = req.body.price;
     const number = req.body.number;
-    const userKey = req.cookies.userKey;
+    // const userKey = req.cookies.userKey;
+    const userKey = req.session.infoUser;
     console.log('得到的数据用户', userKey);
     const openid = userKey.openid;
    // console.log('获取上传的文件信息', req.file); // 获取上传的文件信息
@@ -243,7 +245,8 @@ app.get('/mypublic', (req, res) => {
     try {
         //得到用户的openid
         //读取用户信息
-        const userKey = req.cookies.userKey;
+        // const userKey = req.cookies.userKey;
+        const userKey = req.session.infoUser;
         console.log('得到的数据用户', userKey);
         const openid = userKey.openid;
         //在数据库中获取所有的聊天记录，定义sql语句
@@ -284,7 +287,8 @@ app.get('/coursesend', (req, res) => {
 app.post("/updateStatus", (req, res) => {
     const newStatus = req.body.status;
     //读取用户信息
-    const userKey = req.cookies.userKey;
+    // const userKey = req.cookies.userKey;
+    const userKey = req.session.infoUser;
     let openid = userKey.openid;
     const str = "UPDATE student SET issend = ? WHERE openid = ?";
     db.query(str, [newStatus, openid], (err, result) => {
@@ -295,7 +299,8 @@ app.post("/updateStatus", (req, res) => {
 // 处理获取状态的请求
 app.get("/getStatus", (req, res) => {
     //读取用户信息
-    const userKey = req.cookies.userKey;
+    // const userKey = req.cookies.userKey;
+    const userKey = req.session.infoUser;
     let openid = userKey.openid;
     const str = 'select * from student where openid = ?';
     db.query(str, [openid], (err, result) => {
@@ -313,7 +318,8 @@ app.get("/getStatus", (req, res) => {
 app.get('/course', (req, res) =>{
     try {
     //读取用户信息
-    const userKey = req.cookies.userKey;
+    // const userKey = req.cookies.userKey;
+        const userKey = req.session.infoUser;
     console.log('得到的数据用户', userKey);
     const openid = userKey.openid;
     const startDate = "2023-02-13"; // 开学日期
@@ -419,7 +425,8 @@ app.get('/course', (req, res) =>{
 app.get('/course/:id', (req, res) =>{
     try {
     //读取用户信息
-    const userKey = req.cookies.userKey;
+    // const userKey = req.cookies.userKey;
+        const userKey = req.session.infoUser;
     console.log('得到的数据用户', userKey);
     const openid = userKey.openid;
     // 获取传递的周数值
@@ -553,7 +560,8 @@ app.get('/goodsdetial/:id', (req, res) =>{
 app.get('/score', (req, res)=>{
     try {
         //读取用户信息
-        const userKey = req.cookies.userKey;
+        // const userKey = req.cookies.userKey;
+        const userKey = req.session.infoUser;
         console.log('得到的数据用户', userKey);
         const openid = userKey.openid;
         const str = 'select * from student where openid =?';
@@ -586,7 +594,8 @@ app.get('/found', checkLogin, (req, res) =>{
 app.get('/myInfo', (req, res) => {
     try {
     //读取用户信息
-        const userKey = req.cookies.userKey;
+    //     const userKey = req.cookies.userKey;
+        const userKey = req.session.infoUser;
         console.log('得到的数据用户', userKey);
         const openid = userKey.openid;
         const str = 'select * from student where openid =?';
@@ -609,7 +618,8 @@ app.post('/course', checkCourseExist, async(req, res) =>{
             password
         }
         //读取用户信息
-        const userKey = req.cookies.userKey;
+        // const userKey = req.cookies.userKey;
+        const userKey = req.session.infoUser;
         console.log('得到的数据用户', userKey);
         const openid = userKey.openid;
         // 将 username 和 password 写入 session
@@ -634,7 +644,8 @@ app.post('/score', async(req, res) => {
             password
         }
         //读取用户信息
-        const userKey = req.cookies.userKey;
+        // const userKey = req.cookies.userKey;
+        const userKey = req.session.infoUser;
         console.log('得到的数据用户', userKey);
         const openid = userKey.openid;
         await score(username, password, openid);
@@ -656,7 +667,8 @@ app.get('/loginscore', (req, res) =>{
 app.get('/allquestion', (req, res) => {
     try {
         //读取用户信息
-        const userKey = req.cookies.userKey;
+        // const userKey = req.cookies.userKey;
+        const userKey = req.session.infoUser;
         let nickname = userKey.nickname;
         const str = 'select * from question ORDER BY time DESC';
         db.query(str, (err, result) => {
@@ -671,7 +683,8 @@ app.get('/allquestion', (req, res) => {
 app.post('/allquestion', (req, res) => {
     try {
         //读取用户信息
-        const userKey = req.cookies.userKey;
+        // const userKey = req.cookies.userKey;
+        const userKey = req.session.infoUser;
         let openid = userKey.openid;
         let nickname = userKey.nickname;
         let headimgurl = userKey.headimgurl;
@@ -698,7 +711,8 @@ app.post('/allquestion', (req, res) => {
 app.get('/myquestion', (req, res) => {
     try {
         //读取用户信息
-        const userKey = req.cookies.userKey;
+        // const userKey = req.cookies.userKey;
+        const userKey = req.session.infoUser;
         console.log('得到的数据用户', userKey);
         const openid = userKey.openid;
         const str = 'select * from question where openid =? ORDER BY time DESC';

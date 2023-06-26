@@ -7,9 +7,9 @@ module.exports = {
             "url":"http://www.myyaya.com.cn/getCode"
         },
         {
-            "type":"view",
-            "name":"登录",
-            "url":"http://www.myyaya.com.cn/getCode"
+            "type":"click",
+            "name":"成绩查询",
+            "key":"SCORE"
         },
         {
             "type":"view",
