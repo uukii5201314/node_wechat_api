@@ -32,13 +32,19 @@ module.exports = () => {
             if (sha1Str !== signature){
                 //说明消息不是来自微信服务器
                 res.end('error');
+                // return ;
             }
             try {
             //接受请求体中的数据
                 const xmlData = await getUserDataAsync(req);
                  //console.log(xmlData)
                 //将xml数据解析为js数据
-                const jsData = await parseXMLAsync(xmlData);
+                const jsData = await parseXMLAsync(xmlData).catch(error => {
+                    // 处理 Promise 拒绝的错误
+                    console.error(error);
+                    // 可以选择抛出错误或返回一个处理后的默认值
+                    throw error; // 抛出错误终止
+                });
                  // console.log(jsData)
                 //数据格式化
                 const message = formatMessage(jsData);
@@ -51,7 +57,7 @@ module.exports = () => {
 
                 console.log(resMessage)
                 //返回响应给微信服务器
-               return  res.type('application/xml').send(resMessage)
+               return  res.type('application/xml').send(resMessage)  //.type('application/xml')
                 // //会发送三次请求
                 // res.end('');
             } catch (e) {

@@ -6,8 +6,12 @@ module.exports = {
             let xmlData = '';
             req
                 .on('data', data => {
-                    //读取buffer,转换字符串
-                    xmlData += data.toString();
+                    try {
+                        // 读取 buffer，转换为字符串
+                        xmlData += data.toString();
+                    } catch (error) {
+                        reject(error);
+                    }
                 })
                 .on('end', () => {
                     //数据接受完毕

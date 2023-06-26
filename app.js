@@ -310,7 +310,7 @@ app.get("/getStatus", (req, res) => {
     })
 });
 //课程表
-app.get('/course', checkLogin, (req, res) =>{
+app.get('/course', (req, res) =>{
     try {
     //读取用户信息
     const userKey = req.cookies.userKey;
@@ -416,7 +416,7 @@ app.get('/course', checkLogin, (req, res) =>{
     }
 })
 //选择周次
-app.get('/course/:id', checkLogin, (req, res) =>{
+app.get('/course/:id', (req, res) =>{
     try {
     //读取用户信息
     const userKey = req.cookies.userKey;
@@ -432,6 +432,10 @@ app.get('/course/:id', checkLogin, (req, res) =>{
     db.query(strAll, values, function(error, results) {
         if (error) throw error;
         console.log(results)
+        if (results.length == 0){
+            res.render('success',{title: '未登录', msg: '您还未登录，点击跳转进入登录页面！', url: 'http://www.myyaya.com.cn/login'});
+            return;
+        }
         console.log('1111',results.length);
         let week11 = []; let week12 = []; let week13 = []; let week14 = []; let week15 = [];
         let week21 = []; let week22 = []; let week23 = []; let week24 = []; let week25 = [];
@@ -731,6 +735,9 @@ app.get('/share', (req, res) => {
 });
 app.get('/about', (req, res) => {
     res.render('about')
+})
+app.get('/', (req, res) =>{
+    res.render('home')
 })
 
 //接受处理所有的消息

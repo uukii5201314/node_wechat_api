@@ -34,13 +34,6 @@ module.exports = message => {
         } else {
             console.log('无情取关')
         }
-    } else if (message.MsgType === 'click'){
-        if (message.Event === 'SCORE_QUERY'){
-            content = '你的成绩为0'
-        }
-        if (message.Event === 'COURSE_SCHEDULE'){
-            content = '你今天没有课'
-        }
     }
 
     options.content = content;
