@@ -22,10 +22,10 @@ module.exports = {
     parseXMLAsync(xmlData){
         return new Promise((resolve, reject) => {
             parseString(xmlData, {trim: true}, (err, data) =>{
-                if (!err){
-                    resolve(data);
-                } else {
+                if (err) {
                     reject('parseXMLAsync方法出了问题' + err);
+                } else {
+                    resolve(data);
                 }
             })
         })

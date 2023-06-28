@@ -35,10 +35,13 @@ module.exports = message => {
             content = '欢迎你的关注'
         } else if (message.EventKey === 'SCORE'){ // 使用 message.EventKey 来判断点击事件的 key 值
             options.msgType = 'text'; // 将消息类型设置为 "text"，代表文本消息
-            content = '开发中。。。。'
+            content = '开发中......'
         } else {
             console.log('无情取关')
         }
+    } else {
+        options.msgType = 'text'; // 将消息类型设置为 "text"，代表文本消息
+        content = '暂不支持此类型消息回复'
     }
 
     options.content = content;
