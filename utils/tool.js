@@ -1,5 +1,6 @@
 //工具包函数
-const {parseString} = require('xml2js');
+const { parseString } = require('xml2js');
+
 module.exports = {
     getUserDataAsync(req){
         return new Promise((resolve, reject) => {
@@ -21,13 +22,18 @@ module.exports = {
     },
     parseXMLAsync(xmlData){
         return new Promise((resolve, reject) => {
-            parseString(xmlData, {trim: true}, (err, data) =>{
-                if (err) {
-                    reject('parseXMLAsync方法出了问题' + err);
-                } else {
-                    resolve(data);
-                }
-            })
+            try {
+                parseString(xmlData, {trim: true}, (err, data) =>{
+                    if (err) {
+                        reject('parseXMLAsync方法出了问题' + err);
+                    } else {
+                        resolve(data);
+                    }
+                })
+            } catch (e) {
+                console.log('parseXMLAsync方法出了问题', e)
+                throw e;
+            }
         })
 
     },

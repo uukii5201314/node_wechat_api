@@ -26,6 +26,7 @@ const swiper = require('./wechat/swiper');
 const session = require('express-session');
 //导入中间件
 let checkLogin = require('./middlewear/checklogin');
+let checkopenid = require('./middlewear/checkopenid');
 let checkScoreLogin = require('./middlewear/checkScoreLogin');
 const checkCourseExist = require('./middlewear/checkCourseExist');
 const last = require('./utils/last');
@@ -96,7 +97,7 @@ app.get('/search', async (req, res) => {
     });
 });
 
-app.get('/user', (req, res) =>{
+app.get('/user', checkopenid, (req, res) =>{
     try {
     //读取用户信息
     // const userKey = req.cookies.userKey;
@@ -193,7 +194,7 @@ app.get('/upload/:filename', function(req, res) {
 });
 
 // 处理上传接口
-app.post('/upload', upload.single('imgFile'), (req, res) => {   // upload.array('imgFile', 10),
+app.post('/upload', checkopenid, upload.single('imgFile'), (req, res) => {   // upload.array('imgFile', 10),
     let id = shortid.generate();
     const goodsName = req.body.goodsName;
     const detial = req.body.detial;
@@ -241,7 +242,7 @@ app.post('/upload', upload.single('imgFile'), (req, res) => {   // upload.array(
 })
 
 //获取自己的资源信息
-app.get('/mypublic', (req, res) => {
+app.get('/mypublic', checkopenid, (req, res) => {
     try {
         //得到用户的openid
         //读取用户信息
@@ -284,7 +285,7 @@ app.get('/coursesend', (req, res) => {
     res.render('coursesend');
 })
 // 处理更新状态的请求
-app.post("/updateStatus", (req, res) => {
+app.post("/updateStatus", checkopenid, (req, res) => {
     const newStatus = req.body.status;
     //读取用户信息
     // const userKey = req.cookies.userKey;
@@ -297,7 +298,7 @@ app.post("/updateStatus", (req, res) => {
     });
 });
 // 处理获取状态的请求
-app.get("/getStatus", (req, res) => {
+app.get("/getStatus", checkopenid, (req, res) => {
     //读取用户信息
     // const userKey = req.cookies.userKey;
     const userKey = req.session.infoUser;
@@ -315,7 +316,7 @@ app.get("/getStatus", (req, res) => {
     })
 });
 //课程表
-app.get('/course', (req, res) =>{
+app.get('/course', checkopenid, (req, res) =>{
     try {
     //读取用户信息
     // const userKey = req.cookies.userKey;
@@ -422,7 +423,7 @@ app.get('/course', (req, res) =>{
     }
 })
 //选择周次
-app.get('/course/:id', (req, res) =>{
+app.get('/course/:id', checkopenid, (req, res) =>{
     try {
     //读取用户信息
     // const userKey = req.cookies.userKey;
@@ -430,8 +431,8 @@ app.get('/course/:id', (req, res) =>{
     console.log('得到的数据用户', userKey);
     const openid = userKey.openid;
     // 获取传递的周数值
-    const selectedWeek = req.query.week || 6;
-    const id = req.params.id || 6;
+    const selectedWeek = req.query.week;
+    const id = req.params.id;
 
     // 定义 SQL 语句，使用所选周数值作为查询条件
     const strAll = "SELECT * FROM schedule WHERE FIND_IN_SET(?, weeks) > 0 AND openid = ?";
@@ -557,7 +558,7 @@ app.get('/goodsdetial/:id', (req, res) =>{
 })
 
 //成绩
-app.get('/score', (req, res)=>{
+app.get('/score', checkopenid, (req, res)=>{
     try {
         //读取用户信息
         // const userKey = req.cookies.userKey;
@@ -591,7 +592,7 @@ app.get('/found', checkLogin, (req, res) =>{
 })
 
 //个人信息
-app.get('/myInfo', (req, res) => {
+app.get('/myInfo', checkopenid, (req, res) => {
     try {
     //读取用户信息
     //     const userKey = req.cookies.userKey;
@@ -609,7 +610,7 @@ app.get('/myInfo', (req, res) => {
 })
 
 //爬取课表
-app.post('/course', checkCourseExist, async(req, res) =>{
+app.post('/course', checkopenid, checkCourseExist, async(req, res) =>{
     try {
         const username = req.body.username;
         const password = req.body.password;
@@ -634,7 +635,7 @@ app.post('/course', checkCourseExist, async(req, res) =>{
 })
 
 //爬取成绩
-app.post('/score', async(req, res) => {
+app.post('/score', checkopenid, async(req, res) => {
     try {
         console.log('爬取成')
         const username = req.body.username;
@@ -680,7 +681,7 @@ app.get('/allquestion', (req, res) => {
     }
 })
 //接受问题
-app.post('/allquestion', (req, res) => {
+app.post('/allquestion', checkopenid, (req, res) => {
     try {
         //读取用户信息
         // const userKey = req.cookies.userKey;
@@ -708,7 +709,7 @@ app.post('/allquestion', (req, res) => {
 
 })
 //获取个人信息
-app.get('/myquestion', (req, res) => {
+app.get('/myquestion', checkopenid, (req, res) => {
     try {
         //读取用户信息
         // const userKey = req.cookies.userKey;
