@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>问题详情</title>
+    <link rel="stylesheet" href="/css/allquestion.css">
+</head>
+<body>
+    
+
+<% result.forEach(item => { %>
+    <div class="question">
+        <div class="question__header">
+            <div class="left">
+                <img src="<%= item.headimgUrl%>" alt="头像">
+                <div class="question__name">@<%= item.nickname %></div>
+            </div>
+            <div class="question__time"><%= item.time %></div>
+        </div>
+        <div class="question__content">
+            <%= item.question %>
+        </div>
+    </div>
+
+
+    <div class="form">
+        <form action="/replay/<%= item.id %>" method="post" enctype="application/x-www-form-urlencoded">
+            <textarea class="forminput" name="content" placeholder="回复点什么好呢？"></textarea>
+            <div class="formbelow">
+                <div class="name"><%= nickname %></div>
+                <button id="submitButton" class="btn" type="submit">回复问题</button>
+            </div>
+        </form>
+    </div>
+<% }) %>
+
+
+<% repres.forEach(item => { %>
+    <div class="question">
+        <div class="question__header">
+            <div class="left">
+                <img src="<%= item.headimgurl%>" alt="头像">
+                <div class="question__name">@<%= item.nickname %></div>
+            </div>
+            <div class="question__time"><%= item.time %></div>
+        </div>
+        <div class="question__content">
+            <%= item.content %>
+        </div>
+    </div>
+<% }) %>
+
+
+
+
+<a href="/service">
+    <div class="back">
+        <img src="/icon/群蜂主页.png" alt="">
+    </div>
+</a>
+<script>
+    // 监听表单提交事件
+    document.getElementById("submitButton").addEventListener("click", function(event) {
+        // 阻止表单默认提交行为
+        event.preventDefault();
+
+        // 获取问题输入框的值
+        const questionInput = document.querySelector(".forminput");
+        const questionValue = questionInput.value;
+
+        // 检查问题输入框是否为空
+        if (questionValue.trim() === "") {
+            alert("问题不能为空！");
+        } else {
+            // 表单验证通过，手动提交表单
+            event.target.closest("form").submit();
+        }
+    });
+</script>
+</body>
+</html>
