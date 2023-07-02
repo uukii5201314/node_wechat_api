@@ -7,17 +7,17 @@ function getWeekNumber(startDate, currentDate) {
     const firstWeekStart = new Date(start.setDate(firstDay));
 
     // 计算相差的天数
-    const timeDiff = current.getTime() - firstWeekStart.getTime() + 86400000; // 加上一天的时间差（86400000毫秒）
+    const timeDiff = current.getTime() - firstWeekStart.getTime(); // 移除加上一天的时间差（86400000毫秒）
     const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
 
     // 计算当前日期是第几周
-    const currentWeek = Math.floor(diffDays / 7) + 1;
+    const currentWeek = Math.ceil((diffDays + 1) / 7); // 使用 ceil 函数向上取整来确保不少于一周的天数算作一周
 
-    // 计算明天的日期
-    const tomorrowDate = new Date(current.getTime() + 86400000);
-    const tomorrowWeekday = tomorrowDate.getDay(); // 0 表示星期日，1 表示星期一，以此类推
+    // 获取当前日期是星期几
+    const weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+    const currentWeekday = current.getDay();
 
-    return { week: currentWeek, weekday: tomorrowWeekday };
+    return { week: currentWeek, weekday: weekdays[currentWeekday] };
 }
 
 module.exports = getWeekNumber;
@@ -26,4 +26,4 @@ module.exports = getWeekNumber;
 // const currentDate = new Date().toISOString().split('T')[0]; // 当前日期
 //
 // const result = getWeekNumber(startDate, currentDate);
-// console.log("今天是第 " + result.week + " 周" + "，明天是星期 " + result.weekday);
+// console.log(`今天是第 ${result.week} 周，今天是${result.weekday}`); // 显示今天的周次和星期几信息

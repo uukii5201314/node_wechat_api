@@ -665,7 +665,7 @@ app.get('/loginscore', (req, res) =>{
 })
 
 //问题社区
-app.get('/allquestion', (req, res) => {
+app.get('/allquestion', checkopenid, (req, res) => {
     try {
         //读取用户信息
         // const userKey = req.cookies.userKey;
@@ -744,6 +744,58 @@ app.post('/question/:id', (req, res) => {
         }
     })
 })
+//消息回复路由
+app.get('/question/:id', checkopenid, (req, res) => {
+    try {
+        const userKey = req.session.infoUser;
+        let nickname = userKey.nickname;
+        //获取参数
+        let id = req.params.id;
+        console.log('唯一标识', id);
+        const str = 'select * from question where id = ?'
+        const value = [id];
+        db.query(str, value, (err, result) => {
+            if(err) return err;
+            // console.log(result);
+            const repstr = 'select * from replay where id = ? ORDER BY time DESC'
+            db.query(repstr, value, (err, repres) => {
+                console.log(repres);
+                if(err) return err;
+                res.render('questiondetial', { result, nickname, repres })
+            })
+        })
+    } catch (error) {
+        throw error;
+    }
+})
+//回复消息接口处理路由
+app.post('/replay/:id', checkopenid, (req, res) => {
+    try {
+        const userKey = req.session.infoUser;
+        let openid = userKey.openid;
+        let nickname = userKey.nickname;
+        let headimgurl = userKey.headimgurl;
+        let content = req.body.content;
+        let time = moment().format('YYYY-MM-DD HH:mm:ss');
+        //获取参数
+        let id = req.params.id;
+        //定义一个sql语句
+        const str = 'insert into replay (id, openid, nickname, headimgurl, content, time) values(?, ?, ?, ?, ?, ?)'
+        //执行sql语句
+        db.query(str, [id, openid, nickname, headimgurl, content, time], (err, result) => {
+            if(err) return console.log(err.message);
+            if(result.affectedRows === 1){
+                console.log('插入成功');
+                //成功提醒
+                res.render('success', {title: '回复成功', msg: '回复成功！', url: `http://www.myyaya.com.cn/question/${id}`})
+            }
+        });
+
+    } catch (error) {
+        throw error;
+    }
+})
+
 //接口
 app.get('/share', (req, res) => {
     res.render('share')

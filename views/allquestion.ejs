@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/allquestion.css">
 </head>
 <body>
+    
 <div class="form">
     <form action="/allquestion" method="post" enctype="application/x-www-form-urlencoded">
         <textarea class="forminput" name="question" placeholder="请输入您的问题"></textarea>
@@ -18,18 +19,20 @@
 </div>
 
 <% result.forEach(item => { %>
-<div class="question">
-    <div class="question__header">
-        <div class="left">
-            <img src="<%= item.headimgUrl%>" alt="头像">
-            <div class="question__name">@<%= item.nickname %></div>
+<a href="question/<%= item.id %>">
+    <div class="question">
+        <div class="question__header">
+            <div class="left">
+                <img src="<%= item.headimgUrl%>" alt="头像">
+                <div class="question__name">@<%= item.nickname %></div>
+            </div>
+            <div class="question__time"><%= item.time %></div>
         </div>
-        <div class="question__time"><%= item.time %></div>
+        <div class="question__content">
+            <%= item.question %>
+        </div>
     </div>
-    <div class="question__content">
-        <%= item.question %>
-    </div>
-</div>
+</a>
 <% }) %>
 
 
