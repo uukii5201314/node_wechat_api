@@ -807,6 +807,14 @@ app.get('/', (req, res) =>{
     res.render('home')
 })
 
+//后台登录页面
+app.get('/adminLogin', (req, res) => {
+    res.render('adminLogin');
+})
+app.get('/admin', (req, res) => {
+    res.render('admin');
+})
+
 //接受处理所有的消息
 app.use(auth());
 
